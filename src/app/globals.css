@@ -3,20 +3,49 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 0 0% 100%;
+  --foreground: 230 35% 18%;
+  --muted: 213 18% 95%;
+  --muted-foreground: 221 12% 45%;
+  --accent: 174 70% 44%;
+  --accent-foreground: 174 82% 18%;
+  --card: 0 0% 100%;
+  --card-foreground: 221 35% 15%;
+  --border: 221 18% 88%;
+  --radius: 1rem;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 221 62% 12%;
+    --foreground: 213 18% 95%;
+    --muted: 221 62% 16%;
+    --muted-foreground: 221 16% 72%;
+    --accent: 174 85% 62%;
+    --accent-foreground: 221 62% 12%;
+    --card: 221 62% 15%;
+    --card-foreground: 213 18% 95%;
+    --border: 221 30% 28%;
   }
 }
 
 body {
   min-height: 100vh;
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: theme("fontFamily.sans", "Inter", "system-ui", sans-serif);
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: theme("fontFamily.sans");
+  letter-spacing: 0.01em;
+}
+
+.container-balanced {
+  width: min(1120px, 92vw);
+  margin: 0 auto;
+}
+
+.glass-panel {
+  @apply rounded-3xl border border-white/10 bg-white/80 p-8 shadow-hero backdrop-blur;
+}
+
+.glass-dark {
+  @apply rounded-3xl border border-white/15 bg-midnight/80 p-8 text-white shadow-hero backdrop-blur;
 }
