@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 
 const contactPayload = z.object({
@@ -19,16 +20,16 @@ const RESEND_FROM = process.env.RESEND_FROM; // e.g., "noreply@your-domain.com" 
 const RESEND_TO = process.env.RESEND_TO || process.env.CONTACT_FORWARD_TO; // where to forward contact emails
 
 // Supabase (optional; stores the contact in a table)
-// const SUPABASE_URL =
-//   process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
-// const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
+const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // Initialize clients if keys are present
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
-// const supabase =
-//   SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
-//     ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
-//     : null;
+const supabase =
+  SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY
+    ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+    : null;
 
 export async function POST(request: Request) {
   try {
@@ -69,18 +70,26 @@ export async function POST(request: Request) {
       );
     }
 
-    // // 2) Persist to Supabase (if configured)
-    // if (supabase) {
-    //   tasks.push(
-    //     supabase.from("contact_messages").insert({
-    //       name: data.name,
-    //       email: data.email,
-    //       company: data.company,
-    //       goals: data.goals,
-    //       created_at: new Date().toISOString(),
-    //     })
-    //   );
-    // }
+    // 2) Persist to Supabase (if configured)
+    if (supabase) {
+      const insertPromise = supabase
+        .from("contact_messages")
+        .insert([
+          {
+            name: data.name,
+            email: data.email,
+            company: data.company,
+            goals: data.goals,
+            created_at: new Date().toISOString(),
+          },
+        ])
+        .then(({ data, error }) => {
+          if (error) throw error;
+          return data;
+        });
+
+      tasks.push(insertPromise as Promise<any>);
+    }
 
     // Execute all configured tasks (don't fail the request on partial errors)
     const results = await Promise.allSettled(tasks);
