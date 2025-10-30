@@ -1,7 +1,7 @@
+import { ArrowRight, Brain, Target, Zap } from "lucide-react";
 import Image from "next/image";
-import { Button } from "./ui/button";
 import { IntersectionAnimation } from "./animations";
-import { ArrowRight, Brain, Target, Zap, CheckCircle, TrendingUp, Timer, Users, ShieldCheck } from "lucide-react";
+import { Button } from "./ui/button";
 
 const heroStats = [
   { label: "Average ROI", value: "6.4x" },
@@ -13,25 +13,40 @@ const heroFeatures = [
   {
     icon: Brain,
     title: "AI Strategy",
-    description: "Executive alignment with measurable AI roadmaps tailored to your industry.",
+    description:
+      "Executive alignment with measurable AI roadmaps tailored to your industry.",
   },
   {
     icon: Target,
     title: "Implementation",
-    description: "Secure multi-cloud delivery squads that launch production-ready AI in weeks.",
+    description:
+      "Secure multi-cloud delivery squads that launch production-ready AI in weeks.",
   },
   {
     icon: Zap,
     title: "ROI Velocity",
-    description: "Accelerators that unlock tangible business impact inside the first 90 days.",
+    description:
+      "Accelerators that unlock tangible business impact inside the first 90 days.",
   },
 ];
 
-const floatingIcons = [
-  { icon: TrendingUp, style: { top: "18%", left: "12%" }, translate: "-translate-x-1/2 -translate-y-1/2" },
-  { icon: Timer, style: { bottom: "18%", left: "20%" }, translate: "-translate-x-1/2 translate-y-1/2" },
-  { icon: ShieldCheck, style: { top: "30%", right: "15%" }, translate: "translate-x-1/2 -translate-y-1/2" },
-];
+// const floatingIcons = [
+//   {
+//     icon: TrendingUp,
+//     style: { top: "18%", left: "12%" },
+//     translate: "-translate-x-1/2 -translate-y-1/2",
+//   },
+//   {
+//     icon: Timer,
+//     style: { bottom: "18%", left: "20%" },
+//     translate: "-translate-x-1/2 translate-y-1/2",
+//   },
+//   {
+//     icon: ShieldCheck,
+//     style: { top: "30%", right: "15%" },
+//     translate: "translate-x-1/2 -translate-y-1/2",
+//   },
+// ];
 
 export function Hero() {
   return (
@@ -45,13 +60,13 @@ export function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/90" />
 
-      {floatingIcons.map(({ icon: Icon, style, translate }) => (
+      {/* {floatingIcons.map(({ icon: Icon, style, translate }) => (
         <Icon
           key={`${style.top ?? style.bottom}-${style.left ?? style.right}`}
           className={`absolute hidden h-10 w-10 text-accent/80 drop-shadow-hero sm:block transform ${translate}`}
           style={style}
         />
-      ))}
+      ))} */}
 
       <div className="relative container-balanced grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
         <IntersectionAnimation animation="fade-in-up" className="space-y-10">
@@ -67,14 +82,21 @@ export function Hero() {
               <span className="block text-accent">Real Business Growth</span>
             </h1>
             <p className="max-w-2xl text-lg text-white/80">
-              You &amp; AI architects end-to-end AI programs that increase revenue, optimize operations, and uplevel teams with measurable outcomes every quarter.</p>
+              You &amp; AI builds end-to-end AI programs that increase revenue,
+              optimize operations, and uplevel teams with measurable outcomes
+              every quarter.
+            </p>
           </div>
           <div className="flex flex-col gap-4 md:flex-row md:items-center">
             <Button size="lg" className="w-full md:w-auto">
               Book a Free Strategy Call
               <ArrowRight className="ml-3 h-5 w-5" />
             </Button>
-            <Button variant="outline" size="lg" className="w-full border-white/40 text-white md:w-auto">
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full border-white/40 text-white md:w-auto"
+            >
               Download Free AI Readiness Guide
             </Button>
           </div>
@@ -82,33 +104,50 @@ export function Hero() {
             {heroStats.map((stat) => (
               <div key={stat.label} className="space-y-1">
                 <dt>{stat.label}</dt>
-                <dd className="text-3xl font-semibold text-white">{stat.value}</dd>
+                <dd className="text-3xl font-semibold text-white">
+                  {stat.value}
+                </dd>
               </div>
             ))}
           </dl>
         </IntersectionAnimation>
 
-        <IntersectionAnimation animation="fade-in-up" delay={0.15} className="glass-panel relative">
+        <IntersectionAnimation
+          animation="fade-in-up"
+          delay={0.15}
+          className="glass-panel relative"
+        >
           <div className="space-y-8">
             <div className="space-y-3">
               <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/60">
                 Proven playbook
               </p>
-              <h2 className="text-2xl font-semibold text-primary">Launch with confidence</h2>
+              <h2 className="text-2xl font-semibold text-primary">
+                Launch with confidence
+              </h2>
               <p className="text-sm text-slate-600">
-                Strategy, delivery, and enablement squads aligned to help you ship production-ready AI that accelerates measurable business outcomes.
+                Strategy, delivery, and enablement squads aligned to help you
+                ship production-ready AI that accelerates measurable business
+                outcomes.
               </p>
             </div>
 
             <div className="space-y-5">
               {heroFeatures.map((feature) => (
-                <div key={feature.title} className="flex gap-4 rounded-2xl border border-primary/10 bg-white/90 p-4">
+                <div
+                  key={feature.title}
+                  className="flex gap-4 rounded-2xl border border-primary/10 bg-white/90 p-4"
+                >
                   <div className="flex h-10 w-10 items-center justify-center rounded-full bg-accent/10">
                     <feature.icon className="h-5 w-5 text-accent" />
                   </div>
                   <div className="space-y-1">
-                    <p className="text-sm font-semibold text-primary">{feature.title}</p>
-                    <p className="text-sm text-slate-600">{feature.description}</p>
+                    <p className="text-sm font-semibold text-primary">
+                      {feature.title}
+                    </p>
+                    <p className="text-sm text-slate-600">
+                      {feature.description}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -127,7 +166,9 @@ function LeadMagnetForm() {
     <form className="mt-6 space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">First name</label>
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            First name
+          </label>
           <input
             type="text"
             placeholder="Jordan"
@@ -135,7 +176,9 @@ function LeadMagnetForm() {
           />
         </div>
         <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Work email</label>
+          <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+            Work email
+          </label>
           <input
             type="email"
             placeholder="jordan@company.com"
@@ -144,7 +187,9 @@ function LeadMagnetForm() {
         </div>
       </div>
       <div className="space-y-2">
-        <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">Company</label>
+        <label className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+          Company
+        </label>
         <input
           type="text"
           placeholder="Acme Corp"
@@ -155,9 +200,9 @@ function LeadMagnetForm() {
         Download the guide
       </Button>
       <p className="text-xs text-slate-500">
-        Comprehensive 20-page playbook covering AI strategy, infrastructure, and change management best practices.
+        Comprehensive 20-page playbook covering AI strategy, infrastructure, and
+        change management best practices.
       </p>
     </form>
   );
 }
-

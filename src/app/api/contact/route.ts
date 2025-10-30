@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { z } from "zod";
 
 import { createClient } from "@supabase/supabase-js";
@@ -31,80 +30,93 @@ const supabase =
     ? createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
     : null;
 
-export async function POST(request: Request) {
-  try {
-    const body = await request.json();
-    const parsed = contactPayload.safeParse(body);
-
-    if (!parsed.success) {
-      return NextResponse.json(
-        { ok: false, message: "Invalid payload" },
-        { status: 400 }
-      );
-    }
-
-    const data = parsed.data;
-
-    // --- Fan-out to integrations (email, DB, Slack) ---
-    const text = [
-      `New contact request`,
-      `Name: ${data.name}`,
-      `Email: ${data.email}`,
-      `Company: ${data.company}`,
-      `Goals:`,
-      data.goals,
-    ].join("\n");
-    // TODO: Send this to your CRM, email service, or data store.
-    console.log("Contact request received", data);
-
-    const tasks: Promise<any>[] = [];
-    // 1) Email forward via Resend (if configured)
-    if (resend && RESEND_FROM && RESEND_TO) {
-      tasks.push(
-        resend.emails.send({
-          from: RESEND_FROM,
-          to: [RESEND_TO],
-          subject: `New contact from ${data.name}`,
-          text,
-        })
-      );
-    }
-
-    // 2) Persist to Supabase (if configured)
-    if (supabase) {
-      const insertPromise = supabase
-        .from("contact_messages")
-        .insert([
-          {
-            name: data.name,
-            email: data.email,
-            company: data.company,
-            goals: data.goals,
-            created_at: new Date().toISOString(),
-          },
-        ])
-        .then(({ data, error }) => {
-          if (error) throw error;
-          return data;
-        });
-
-      tasks.push(insertPromise as Promise<any>);
-    }
-
-    // Execute all configured tasks (don't fail the request on partial errors)
-    const results = await Promise.allSettled(tasks);
-    for (const r of results) {
-      if (r.status === "rejected") {
-        console.error("Contact integration failed:", r.reason);
-      }
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("Error handling contact request", error);
-    return NextResponse.json(
-      { ok: false, message: "Unexpected error" },
-      { status: 500 }
-    );
-  }
+export async function POST(req: Request) {
+  const body = await req.json();
+  const r = await fetch(process.env.CONTACT_API_URL!, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+  return new Response(await r.text(), {
+    status: r.status,
+    headers: { "Content-Type": "application/json" },
+  });
 }
+
+// export async function POST(request: Request) {
+//   try {
+//     const body = await request.json();
+//     const parsed = contactPayload.safeParse(body);
+
+//     if (!parsed.success) {
+//       return NextResponse.json(
+//         { ok: false, message: "Invalid payload" },
+//         { status: 400 }
+//       );
+//     }
+
+//     const data = parsed.data;
+
+//     // --- Fan-out to integrations (email, DB, Slack) ---
+//     const text = [
+//       `New contact request`,
+//       `Name: ${data.name}`,
+//       `Email: ${data.email}`,
+//       `Company: ${data.company}`,
+//       `Goals:`,
+//       data.goals,
+//     ].join("\n");
+//     // TODO: Send this to your CRM, email service, or data store.
+//     console.log("Contact request received", data);
+
+//     const tasks: Promise<any>[] = [];
+//     // 1) Email forward via Resend (if configured)
+//     if (resend && RESEND_FROM && RESEND_TO) {
+//       tasks.push(
+//         resend.emails.send({
+//           from: RESEND_FROM,
+//           to: [RESEND_TO],
+//           subject: `New contact from ${data.name}`,
+//           text,
+//         })
+//       );
+//     }
+
+//     // 2) Persist to Supabase (if configured)
+//     if (supabase) {
+//       const insertPromise = supabase
+//         .from("contact_messages")
+//         .insert([
+//           {
+//             name: data.name,
+//             email: data.email,
+//             company: data.company,
+//             goals: data.goals,
+//             created_at: new Date().toISOString(),
+//           },
+//         ])
+//         .then(({ data, error }) => {
+//           if (error) throw error;
+//           return data;
+//         });
+
+//       tasks.push(insertPromise as Promise<any>);
+//     }
+
+//     // Execute all configured tasks (don't fail the request on partial errors)
+//     const results = await Promise.allSettled(tasks);
+//     for (const r of results) {
+//       if (r.status === "rejected") {
+//         console.error("Contact integration failed:", r.reason);
+//       }
+//     }
+
+//     return NextResponse.json({ ok: true });
+//   } catch (error) {
+//     console.error("Error handling contact request", error);
+//     return NextResponse.json(
+//       { ok: false, message: "Unexpected error" },
+//       { status: 500 }
+//     );
+//   }
+// }

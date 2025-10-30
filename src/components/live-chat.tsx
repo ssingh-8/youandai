@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { MessageCircle, X } from "lucide-react";
-import Link from "next/link";
-import { LeadMagnetDialogTrigger } from "./lead-magnet";
+import { useState } from "react";
+import { RealtimeChat } from "./realtime-chat";
 
 export function LiveChatAssistant() {
   const [open, setOpen] = useState(false);
@@ -21,8 +20,12 @@ export function LiveChatAssistant() {
                 Y
               </span>
               <div>
-                <p className="text-sm font-semibold text-primary">You &amp; AI Assistant</p>
-                <p className="text-xs text-slate-500">Online • respond in under 2 minutes</p>
+                <p className="text-sm font-semibold text-primary">
+                  You &amp; AI Assistant
+                </p>
+                <p className="text-xs text-slate-500">
+                  Online • respond in under 2 minutes
+                </p>
               </div>
             </div>
             <button
@@ -33,42 +36,47 @@ export function LiveChatAssistant() {
               <X className="h-4 w-4" />
             </button>
           </div>
-          <ul className="mt-4 space-y-2 text-xs text-slate-600">
-            <li className="rounded-2xl border border-white/40 bg-white/80 px-3 py-2 shadow-sm">
-              How can AI improve our sales forecasting?
-            </li>
-            <li className="rounded-2xl border border-white/40 bg-white/80 px-3 py-2 shadow-sm">
-              What’s a realistic AI ROI timeline?
-            </li>
-            <li className="rounded-2xl border border-white/40 bg-white/80 px-3 py-2 shadow-sm">
-              Can you integrate with our Azure stack?
-            </li>
-          </ul>
-          <LeadMagnetDialogTrigger>
-            <Link
-              href="#"
-              className="mt-4 inline-flex w-full items-center justify-center rounded-full bg-accent px-4 py-2 text-xs font-semibold text-primary shadow-accent transition-colors hover:bg-accent/90"
-            >
-              Chat with an AI Consultant
-            </Link>
-          </LeadMagnetDialogTrigger>
+          <RealtimeChat
+            roomName="you-and-ai"
+            username="Prospect"
+            presetMessages={[
+              "How can AI improve our sales forecasting?",
+              "What’s a realistic AI ROI timeline?",
+              "Can you integrate with our Azure stack?",
+            ]}
+          />
         </div>
       )}
 
-      <button
-        onClick={() => setOpen((prev) => !prev)}
-        className={`flex h-14 w-14 items-center justify-center rounded-full bg-accent text-primary shadow-accent transition hover:bg-accent/90 ${
-          open ? "" : "animate-hop"
-        }`}
-        aria-expanded={open}
-        aria-controls="live-chat-panel"
-      >
-        {open ? <X className="h-5 w-5" /> : <MessageCircle className="h-5 w-5" />}
-        <span className="sr-only">
-          {open ? "Hide You & AI Assistant" : "Chat with You & AI"}
-        </span>
-      </button>
+      <div className="relative group">
+        <button
+          onClick={() => setOpen((prev) => !prev)}
+          className={`flex h-14 w-14 items-center justify-center rounded-full bg-accent text-primary shadow-accent transition hover:bg-accent/90 ${
+            open ? "" : "animate-hop"
+          }`}
+          aria-expanded={open}
+          aria-controls="live-chat-panel"
+          aria-describedby="live-chat-tooltip"
+        >
+          {open ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <MessageCircle className="h-5 w-5" />
+          )}
+        </button>
+        {!open && (
+          <span
+            id="live-chat-tooltip"
+            role="tooltip"
+            className="pointer-events-none absolute bottom-[calc(100%+0.5rem)] 
+          right-auto left-auto z-10 w-max -translate-x-1/2 rounded-full bg-slate-900 
+          px-4 py-1 text-xs font-medium text-white opacity-0 
+          shadow-lg transition-opacity duration-200 group-hover:opacity-100"
+          >
+            Chat with an AI consultant
+          </span>
+        )}
+      </div>
     </div>
   );
 }
-

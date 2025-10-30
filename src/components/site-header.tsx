@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import { Menu, X } from "lucide-react";
-import { Button } from "./ui/button";
+import Link from "next/link";
+import { useState } from "react";
 import { LeadMagnetDialogTrigger } from "./lead-magnet";
+import { Button } from "./ui/button";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -33,7 +33,11 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 lg:flex">
           {navLinks.map((item) => (
-            <Link key={item.href} href={item.href} className="hover:text-primary">
+            <Link
+              key={item.href}
+              href={item.href}
+              className="hover:text-primary"
+            >
               {item.label}
             </Link>
           ))}
@@ -92,4 +96,3 @@ export function SiteHeader() {
     </header>
   );
 }
-
