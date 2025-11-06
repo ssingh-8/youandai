@@ -1,4 +1,3 @@
-import Link from "next/link";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/site-header";

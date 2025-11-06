@@ -124,7 +124,8 @@ export const RealtimeChat = ({
                 key={preset}
                 type="button"
                 onClick={() => {
-                  setNewMessage(preset), setShowPresetMessages(false);
+                  setNewMessage(preset);
+                  setShowPresetMessages(false);
                 }}
                 className="rounded-2xl border border-border bg-muted px-3 py-1.5 text-left text-xs font-medium text-foreground transition hover:border-accent hover:text-accent"
               >
