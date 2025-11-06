@@ -16,7 +16,7 @@
   "dependencies": {
     "@hono/node-server": "latest",
     "@supabase/supabase-js": "latest",
-    "hono": "latest",
+    "hono": "^4.10.4",
     "resend": "latest",
     "zod": "latest"
   },
