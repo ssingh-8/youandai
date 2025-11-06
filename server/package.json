@@ -1,0 +1,28 @@
+{
+  "name": "you-and-ai-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/node.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch --env-file=.env src/node.ts",
+    "start": "node --env-file=.env dist/node.js",
+    "build": "tsc -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hono/node-server": "latest",
+    "@supabase/supabase-js": "latest",
+    "hono": "latest",
+    "resend": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "latest"
+  }
+}
