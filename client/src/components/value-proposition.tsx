@@ -1,25 +1,37 @@
-import { Lightbulb, Cpu, ShieldCheck } from "lucide-react";
+import { Zap, DollarSign, Target, Workflow, Activity } from "lucide-react";
 import { Card } from "./ui/card";
 import { IntersectionAnimation } from "./animations";
 
 const benefits = [
   {
-    icon: Lightbulb,
-    title: "Strategy anchored in business outcomes",
+    icon: Zap,
+    title: "Low-Latency Systems",
     description:
-      "Identify the highest-leverage use cases tied to revenue, customer experience, and operational efficiency across your enterprise.",
+      "Sub-100ms inference goals with optimized prefill/decode separation and token throughput engineering.",
   },
   {
-    icon: Cpu,
-    title: "Production-ready AI built responsibly",
+    icon: DollarSign,
+    title: "Cost-Optimized GPU Usage",
     description:
-      "GPU-accelerated infrastructure, secure data pipelines, and guardrails for both predictive and generative AI workloads.",
+      "Right-sizing GPU deployments through intelligent batching, scheduling, and resource management.",
   },
   {
-    icon: ShieldCheck,
-    title: "Enablement that scales your teams",
+    icon: Target,
+    title: "Accurate & Robust Models",
     description:
-      "Upskill stakeholders with tailored training, playbooks, and change management to sustain ongoing AI performance.",
+      "Models tailored to your specific environment with comprehensive evaluation harnesses and regression testing.",
+  },
+  {
+    icon: Workflow,
+    title: "Clean Workflow Integration",
+    description:
+      "Seamless integration with existing enterprise systems, ERPs, CRMs, and internal tools.",
+  },
+  {
+    icon: Activity,
+    title: "Production Reliability",
+    description:
+      "Robust fallbacks, comprehensive monitoring, and observability for zero-downtime operations.",
   },
 ];
 
@@ -29,19 +41,35 @@ export function ValueProposition() {
       <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-3xl text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Why You &amp; AI</p>
         <h2 className="mt-3 text-3xl font-semibold text-primary">
-          We help leaders translate AI potential into measurable enterprise results
+          AI that works under real constraints
         </h2>
         <p className="mt-4 text-sm text-slate-600">
-          Our senior architects bring 15+ years of experience across Fortune 500 transformation programs, aligning AI with business KPIs on multi-cloud environments.
+          No buzzwords. No &quot;magic AI button.&quot; Just rigorous engineering focused on speed, memory, cost, and reliability.
         </p>
       </IntersectionAnimation>
 
-      <div className="mt-12 grid gap-6 md:grid-cols-3">
-        {benefits.map((item, index) => (
+      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {benefits.slice(0, 3).map((item, index) => (
           <IntersectionAnimation
             key={item.title}
             animation="fade-in-up"
-            delay={0.15 * index}
+            delay={0.1 * index}
+            className="h-full"
+          >
+            <Card className="h-full border-primary/10 bg-white/95">
+              <item.icon className="h-10 w-10 text-accent" />
+              <h3 className="mt-4 text-lg font-semibold text-primary">{item.title}</h3>
+              <p className="mt-3 text-sm text-slate-600">{item.description}</p>
+            </Card>
+          </IntersectionAnimation>
+        ))}
+      </div>
+      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
+        {benefits.slice(3).map((item, index) => (
+          <IntersectionAnimation
+            key={item.title}
+            animation="fade-in-up"
+            delay={0.1 * (index + 3)}
             className="h-full"
           >
             <Card className="h-full border-primary/10 bg-white/95">
@@ -55,4 +83,3 @@ export function ValueProposition() {
     </section>
   );
 }
-

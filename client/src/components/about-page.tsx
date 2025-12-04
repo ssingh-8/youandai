@@ -1,40 +1,32 @@
 import { Card } from "./ui/card";
 import { IntersectionAnimation } from "./animations";
-import { ShieldCheck, Cloud, Cpu, Users } from "lucide-react";
+import { Zap, Shield, Eye, DollarSign, Wrench } from "lucide-react";
 
-const values = [
-  {
-    icon: ShieldCheck,
-    title: "Security-first",
-    description:
-      "ISO 27001 and SOC 2 certified workflows with continuous compliance monitoring across all AI deployments.",
-  },
-  {
-    icon: Cpu,
-    title: "GPU-accelerated",
-    description:
-      "NVIDIA Inception partners leveraging cutting-edge compute for both predictive modeling and generative AI workloads.",
-  },
-  {
-    icon: Cloud,
-    title: "Multi-cloud expertise",
-    description:
-      "Certified architects across AWS, Azure, and Google Cloud ensuring seamless integration with your existing infrastructure.",
-  },
-  {
-    icon: Users,
-    title: "Human-centered change",
-    description:
-      "Training programs and playbooks that empower teams to adopt AI responsibly and sustainably.",
-  },
+const philosophyPrinciples = [
+  { icon: Zap, title: "Fast" },
+  { icon: Shield, title: "Stable" },
+  { icon: Eye, title: "Understandable" },
+  { icon: DollarSign, title: "Cost-efficient" },
+  { icon: Wrench, title: "Maintainable" },
 ];
 
-const certifications = [
-  "ISO 27001",
-  "SOC 2 Type II",
-  "NVIDIA Inception Partner",
-  "AWS Generative AI Competency",
-  "Azure AI Engineering",
+const background = [
+  "Designing and deploying high-performance GPU inference pipelines",
+  "Building safety-critical AI functionality for real-world applications",
+  "Managing end-to-end model lifecycles: data → training → optimization → deployment",
+  "Working with some of the most demanding latency and reliability requirements in the industry",
+  "Integrating GenAI into legacy enterprise systems without breaking workflows",
+  "Leading engineering teams across perception, inference, MLOps, infrastructure, and platform tooling",
+];
+
+const founderExpertise = [
+  "GPU-accelerated inference and model optimization",
+  "Large-scale model deployment pipelines",
+  "Safety-critical perception and multimodal AI systems",
+  "Quantization flows, ONNX/TensorRT optimization, plugin-level performance tuning",
+  "Multi-cloud GPU infrastructure",
+  "End-to-end MLOps in complex, regulated environments",
+  "Leading teams responsible for production AI in automotive-grade and enterprise-grade systems",
 ];
 
 export function AboutPage() {
@@ -42,45 +34,83 @@ export function AboutPage() {
     <div className="space-y-20 bg-white pb-24 pt-16">
       <section className="container-balanced space-y-4 text-center">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Who we are</p>
-        <h1 className="text-4xl font-semibold text-primary">Deep AI expertise with real-world business fluency</h1>
+        <h1 className="text-4xl font-semibold text-primary">Engineers who ship production AI</h1>
         <p className="mx-auto max-w-3xl text-sm text-slate-600">
-          You &amp; AI is a team of senior AI architects, engineers, and strategists with over 15 years of experience designing, implementing, and scaling AI solutions across regulated industries.
+          We understand how to ship AI systems where performance, correctness, and reliability truly matter.
         </p>
       </section>
 
-      <section className="container-balanced grid gap-10 lg:grid-cols-[minmax(0,0.6fr)_minmax(0,1fr)]">
+      <section className="container-balanced grid gap-10 lg:grid-cols-2">
         <IntersectionAnimation animation="fade-in-up" className="glass-panel">
-          <h2 className="text-2xl font-semibold text-primary">Our mission</h2>
+          <h2 className="text-2xl font-semibold text-primary">Our Background</h2>
           <p className="mt-4 text-sm text-slate-600">
-            We exist to help companies harness AI responsibly to create meaningful value — for customers, employees, and shareholders. Our engagements balance innovation with governance, so teams can deploy AI with confidence.
+            You &amp; AI was founded by engineers with extensive experience building production-grade AI systems used by millions of users globally. Our background includes:
           </p>
-          <p className="mt-4 text-sm text-slate-600">
-            From predictive analytics to generative AI co-pilots, we bring a proven playbook for delivering measurable outcomes while elevating the capabilities of internal teams.
-          </p>
+          <ul className="mt-6 space-y-3 text-sm text-slate-600">
+            {background.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </IntersectionAnimation>
 
-        <IntersectionAnimation animation="fade-in-up" delay={0.15} className="grid gap-6 sm:grid-cols-2">
-          {values.map((value) => (
-            <Card key={value.title} className="border-primary/10 bg-white/95">
-              <value.icon className="h-9 w-9 text-accent" />
-              <h3 className="mt-3 text-lg font-semibold text-primary">{value.title}</h3>
-              <p className="mt-2 text-sm text-slate-600">{value.description}</p>
-            </Card>
-          ))}
+        <IntersectionAnimation animation="fade-in-up" delay={0.15} className="glass-panel">
+          <h2 className="text-2xl font-semibold text-primary">Our Philosophy</h2>
+          <p className="mt-4 text-sm text-slate-600">
+            AI should be:
+          </p>
+          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
+            {philosophyPrinciples.map((principle) => (
+              <div key={principle.title} className="flex items-center gap-3 rounded-xl border border-primary/10 bg-white/80 p-3">
+                <principle.icon className="h-5 w-5 text-accent" />
+                <span className="text-sm font-medium text-primary">{principle.title}</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 rounded-xl border border-primary/10 bg-primary/5 p-4">
+            <p className="text-sm text-primary font-medium">
+              No hype. No &quot;magic AI button.&quot;
+            </p>
+            <p className="text-sm text-primary/80 mt-1">
+              Just rigorous engineering.
+            </p>
+          </div>
         </IntersectionAnimation>
       </section>
 
-      <section className="container-balanced rounded-3xl border border-primary/10 bg-accent-soft/80 p-10 shadow-card">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Certifications &amp; alliances</p>
-        <div className="mt-4 flex flex-wrap gap-3 text-sm text-primary/80">
-          {certifications.map((cert) => (
-            <span key={cert} className="rounded-full border border-primary/20 px-4 py-2">
-              {cert}
-            </span>
-          ))}
-        </div>
+      <section className="container-balanced">
+        <IntersectionAnimation animation="fade-in-up">
+          <Card className="border-primary/10 bg-white/95 p-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
+              <div className="lg:w-1/3 space-y-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">Founder</p>
+                <h2 className="text-2xl font-semibold text-primary">Technical Leadership</h2>
+                <p className="text-sm text-slate-600">
+                  A seasoned machine-learning and systems engineer with deep experience across the full AI deployment stack.
+                </p>
+              </div>
+              <div className="lg:w-2/3">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/60 mb-4">
+                  Areas of expertise:
+                </p>
+                <ul className="grid gap-2 sm:grid-cols-2 text-sm text-slate-600">
+                  {founderExpertise.map((item) => (
+                    <li key={item} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-6 text-sm text-primary/80">
+                  Their work spans thousands of deployed models, distributed training pipelines, and high-performance inference systems powering real products.
+                </p>
+              </div>
+            </div>
+          </Card>
+        </IntersectionAnimation>
       </section>
     </div>
   );
 }
-

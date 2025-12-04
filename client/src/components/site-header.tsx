@@ -3,15 +3,13 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { LeadMagnetDialogTrigger } from "./lead-magnet";
 import { Button } from "./ui/button";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
-  { href: "/case-studies", label: "Case Studies" },
+  { href: "/case-studies", label: "Expertise" },
   { href: "/about", label: "About" },
-  { href: "/blog", label: "Insights" },
   { href: "/contact", label: "Contact" },
 ];
 
@@ -44,18 +42,9 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <LeadMagnetDialogTrigger>
-            <Button
-              variant="ghost"
-              className="font-medium border border-white/40 text-primary hover:border-accent/60"
-              size="sm"
-            >
-              Free AI Readiness Guide
-            </Button>
-          </LeadMagnetDialogTrigger>
           <Link href="/contact">
             <Button size="sm" className="shadow-accent">
-              Book a Free Strategy Call
+              Book a Strategy Call
             </Button>
           </Link>
         </div>
@@ -82,13 +71,8 @@ export function SiteHeader() {
                 {item.label}
               </Link>
             ))}
-            <LeadMagnetDialogTrigger>
-              <Button variant="ghost" className="justify-start font-medium">
-                Download Free AI Readiness Guide
-              </Button>
-            </LeadMagnetDialogTrigger>
             <Link href="/contact">
-              <Button className="w-full">Book a Free Strategy Call</Button>
+              <Button className="w-full">Book a Strategy Call</Button>
             </Link>
           </div>
         </div>

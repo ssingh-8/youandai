@@ -1,30 +1,39 @@
 import { Card } from "./ui/card";
 import { IntersectionAnimation } from "./animations";
+import { Button } from "./ui/button";
+import Link from "next/link";
+import { Eye, Gauge, Server, Layers, Cpu } from "lucide-react";
 
-const studies = [
+const expertiseAreas = [
   {
-    industry: "Manufacturing",
-    company: "Axis Manufacturing",
-    challenge: "Global supply chain volatility and unplanned downtime across 60 facilities",
-    solution: "Predictive maintenance and dynamic inventory optimization using multi-cloud data platforms",
-    results: ["6.2x ROI", "$28M incremental revenue", "Downtime reduced 37%"],
-    testimonial: "You & AI gave us an enterprise blueprint and execution muscle that our teams could scale confidently.",
+    icon: Eye,
+    title: "Latency-Critical Perception Systems",
+    description:
+      "Real-time computer vision and sensor fusion systems with strict timing constraints for safety-critical applications.",
   },
   {
-    industry: "Financial Services",
-    company: "Horizon Financial",
-    challenge: "Fragmented customer intelligence and slow personalization rollouts",
-    solution: "Unified customer AI hub combining predictive models with GenAI for advisor workflows",
-    results: ["48% faster insights", "NPS +17", "Regulatory compliance maintained"],
-    testimonial: "Their governance-first methodology let us deploy responsibly while accelerating innovation."
+    icon: Gauge,
+    title: "Real-Time Decision Pipelines",
+    description:
+      "Sub-100ms inference pipelines with optimized batching, scheduling, and memory management for high-throughput environments.",
   },
   {
-    industry: "Healthcare",
-    company: "Nova Health",
-    challenge: "High patient wait times and inefficiencies in care coordination",
-    solution: "AI-driven triage, staffing optimization, and clinical note automation with strict PHI guardrails",
-    results: ["Wait times reduced 32%", "Clinician productivity +21%", "HIPAA-compliant deployment"],
-    testimonial: "The team balanced empathy, speed, and security — our clinicians immediately saw value."
+    icon: Server,
+    title: "Large-Scale Distributed Training & Evaluation",
+    description:
+      "Multi-node training infrastructure with comprehensive evaluation harnesses and automated regression testing.",
+  },
+  {
+    icon: Layers,
+    title: "Multi-Modal Model Deployment",
+    description:
+      "Vision + language models deployed on GPU clusters with production-grade reliability and observability.",
+  },
+  {
+    icon: Cpu,
+    title: "End-to-End Performance Optimization",
+    description:
+      "Full-stack optimization from model architecture through quantization, graph compilation, and runtime tuning.",
   },
 ];
 
@@ -32,44 +41,52 @@ export function CaseStudies() {
   return (
     <div className="space-y-16 bg-white pb-24 pt-16">
       <section className="container-balanced space-y-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Proven outcomes</p>
-        <h1 className="text-4xl font-semibold text-primary">Industry-specific transformations with measurable KPIs</h1>
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Proven expertise</p>
+        <h1 className="text-4xl font-semibold text-primary">Example Areas of Proven Expertise</h1>
         <p className="mx-auto max-w-3xl text-sm text-slate-600">
-          Explore how You &amp; AI partners with enterprises to unlock revenue, streamline operations, and enable teams with secure AI deployments.
+          Deep experience building and deploying high-performance AI systems across demanding production environments.
         </p>
       </section>
 
-      <div className="container-balanced space-y-8">
-        {studies.map((study, index) => (
-          <IntersectionAnimation key={study.company} animation="fade-in-up" delay={0.15 * index}>
-            <Card className="border-primary/10 bg-white/95 p-8 shadow-card">
-              <div className="flex flex-col gap-6 lg:flex-row lg:justify-between">
-                <div className="space-y-2">
-                  <p className="text-xs font-semibold uppercase tracking-[0.3em] text-accent">{study.industry}</p>
-                  <h2 className="text-2xl font-semibold text-primary">{study.company}</h2>
-                  <p className="text-sm text-slate-600">Challenge: {study.challenge}</p>
-                  <p className="text-sm text-slate-600">Solution: {study.solution}</p>
-                </div>
-                <div className="space-y-3 text-sm text-primary/80">
-                  <p className="text-xs uppercase tracking-[0.3em] text-primary/60">Impact</p>
-                  <ul className="space-y-2">
-                    {study.results.map((result) => (
-                      <li key={result} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent" />
-                        <span>{result}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <blockquote className="rounded-2xl border border-primary/10 bg-primary/5 p-4 text-primary/80">
-                    “{study.testimonial}”
-                  </blockquote>
-                </div>
-              </div>
+      <div className="container-balanced grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {expertiseAreas.slice(0, 3).map((area, index) => (
+          <IntersectionAnimation key={area.title} animation="fade-in-up" delay={0.1 * index}>
+            <Card className="h-full border-primary/10 bg-white/95 p-6">
+              <area.icon className="h-10 w-10 text-accent" />
+              <h2 className="mt-4 text-lg font-semibold text-primary">{area.title}</h2>
+              <p className="mt-3 text-sm text-slate-600">{area.description}</p>
             </Card>
           </IntersectionAnimation>
         ))}
       </div>
+      
+      <div className="container-balanced grid gap-6 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
+        {expertiseAreas.slice(3).map((area, index) => (
+          <IntersectionAnimation key={area.title} animation="fade-in-up" delay={0.1 * (index + 3)}>
+            <Card className="h-full border-primary/10 bg-white/95 p-6">
+              <area.icon className="h-10 w-10 text-accent" />
+              <h2 className="mt-4 text-lg font-semibold text-primary">{area.title}</h2>
+              <p className="mt-3 text-sm text-slate-600">{area.description}</p>
+            </Card>
+          </IntersectionAnimation>
+        ))}
+      </div>
+
+      <section className="container-balanced">
+        <IntersectionAnimation animation="fade-in-up">
+          <div className="rounded-3xl border border-primary/10 bg-accent-soft/80 p-10 shadow-card text-center space-y-6">
+            <h2 className="text-2xl font-semibold text-primary">
+              Have a similar challenge?
+            </h2>
+            <p className="text-sm text-primary/80 max-w-2xl mx-auto">
+              If you need help with inference speed, GPU cost, or integrating AI into an existing workflow — let&apos;s talk.
+            </p>
+            <Link href="/contact">
+              <Button size="lg">Book a Strategy Call</Button>
+            </Link>
+          </div>
+        </IntersectionAnimation>
+      </section>
     </div>
   );
 }
-

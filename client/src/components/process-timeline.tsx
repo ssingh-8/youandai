@@ -3,19 +3,31 @@ import { IntersectionAnimation } from "./animations";
 
 const steps = [
   {
-    phase: "Weeks 1-3",
-    title: "Discovery & Strategic Alignment",
-    bullets: ["Stakeholder workshops", "Data & infrastructure assessment", "ROI business case"],
+    phase: "Phase 1",
+    title: "Assessment & Architecture",
+    bullets: [
+      "Use-case evaluation and feasibility analysis",
+      "Model + GPU resource planning",
+      "Architecture design for scalable deployments",
+    ],
   },
   {
-    phase: "Weeks 4-8",
-    title: "Design & Pilot Build",
-    bullets: ["Model architecture", "Data pipelines & governance", "Pilot deployment"],
+    phase: "Phase 2",
+    title: "Optimization & Build",
+    bullets: [
+      "Model quantization (INT8, FP8, FP16)",
+      "Graph cleanup and operator fusion",
+      "Custom kernels and performance tuning",
+    ],
   },
   {
-    phase: "Weeks 9-12",
-    title: "Scale & Enable",
-    bullets: ["Production rollout", "Training & change management", "Operational handoff"],
+    phase: "Phase 3",
+    title: "Deploy & Monitor",
+    bullets: [
+      "Containerization + GPU scheduling",
+      "CI/CD pipelines for model updates",
+      "Logging, metrics, and model-health monitoring",
+    ],
   },
 ];
 
@@ -23,10 +35,10 @@ export function ProcessTimeline() {
   return (
     <section className="container-balanced py-20">
       <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Delivery model</p>
-        <h2 className="mt-3 text-3xl font-semibold text-primary">A proven 12-week acceleration program</h2>
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Our Approach</p>
+        <h2 className="mt-3 text-3xl font-semibold text-primary">From assessment to production</h2>
         <p className="mt-4 text-sm text-slate-600">
-          Move from strategy to production with a cross-functional team that de-risks AI investments and builds internal capability.
+          A systematic approach to building AI systems that meet strict performance requirements while integrating cleanly with your existing infrastructure.
         </p>
       </IntersectionAnimation>
 
@@ -56,4 +68,3 @@ export function ProcessTimeline() {
     </section>
   );
 }
-
