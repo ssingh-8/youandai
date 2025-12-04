@@ -68,11 +68,11 @@ const services = [
 
 export function ServicesOverview() {
   return (
-    <div className="space-y-16 bg-white pb-24 pt-16">
+    <div className="space-y-16 bg-background pb-24 pt-16">
       <section className="container-balanced space-y-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">What we deliver</p>
-        <h1 className="text-4xl font-semibold text-primary">Services built for real-world AI deployment</h1>
-        <p className="mx-auto max-w-3xl text-sm text-slate-600">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">What we deliver</p>
+        <h1 className="text-4xl font-semibold text-foreground">Services built for real-world AI deployment</h1>
+        <p className="mx-auto max-w-3xl text-sm text-muted-foreground">
           From strategy to optimization to production — we help you build AI systems that meet strict latency, cost, and reliability requirements.
         </p>
       </section>
@@ -80,22 +80,22 @@ export function ServicesOverview() {
       <div className="container-balanced space-y-8">
         {services.map((service, index) => (
           <IntersectionAnimation key={service.title} animation="fade-in-up" delay={0.1 * index}>
-            <Card className="border-primary/10 bg-white/95 p-8">
+            <Card className="border-border p-8">
               <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
                 <div className="lg:w-1/3 space-y-4">
                   <service.icon className="h-10 w-10 text-accent" />
-                  <h2 className="text-2xl font-semibold text-primary">{service.title}</h2>
-                  <p className="text-sm text-slate-600">{service.description}</p>
-                  <p className="text-sm font-medium text-primary">{service.tagline}</p>
+                  <h2 className="text-2xl font-semibold text-card-foreground">{service.title}</h2>
+                  <p className="text-sm text-muted-foreground">{service.description}</p>
+                  <p className="text-sm font-medium text-card-foreground">{service.tagline}</p>
                 </div>
                 <div className="lg:w-2/3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/60 mb-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-4">
                     {service.title === "AI Strategy & Architecture" ? "Deliverables include:" : 
                      service.title === "High-Performance Inference Optimization" ? "Core capabilities:" :
                      service.title === "Production Deployment & MLOps" ? "Expertise includes:" :
                      "Typical integrations:"}
                   </p>
-                  <ul className="grid gap-2 sm:grid-cols-2 text-sm text-slate-600">
+                  <ul className="grid gap-2 sm:grid-cols-2 text-sm text-muted-foreground">
                     {service.features.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
@@ -112,11 +112,11 @@ export function ServicesOverview() {
 
       <section className="container-balanced">
         <IntersectionAnimation animation="fade-in-up">
-          <div className="rounded-3xl border border-primary/10 bg-accent-soft/80 p-10 shadow-card text-center space-y-6">
-            <h2 className="text-2xl font-semibold text-primary">
+          <div className="rounded-3xl border border-border bg-accent-soft p-10 shadow-card text-center space-y-6">
+            <h2 className="text-2xl font-semibold text-foreground">
               Ready to discuss your AI deployment challenge?
             </h2>
-            <p className="text-sm text-primary/80 max-w-2xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
               If you need help with inference speed, GPU cost, or integrating AI into an existing workflow — that&apos;s our specialty.
             </p>
             <Link href="/contact">

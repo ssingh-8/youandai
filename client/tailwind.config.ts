@@ -15,14 +15,14 @@ const config: Config = {
   			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				foreground: 'hsl(var(--accent-foreground))',
+  				soft: 'hsl(var(--accent-soft))'
   			},
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
   			},
-  			midnight: 'hsl(221, 62%, 12%)',
-  			'accent-soft': 'hsl(174, 62%, 96%)',
+  			midnight: 'hsl(var(--midnight))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -145,4 +145,3 @@ const config: Config = {
 };
 
 export default config;
-

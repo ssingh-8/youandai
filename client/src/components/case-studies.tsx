@@ -39,11 +39,11 @@ const expertiseAreas = [
 
 export function CaseStudies() {
   return (
-    <div className="space-y-16 bg-white pb-24 pt-16">
+    <div className="space-y-16 bg-background pb-24 pt-16">
       <section className="container-balanced space-y-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Proven expertise</p>
-        <h1 className="text-4xl font-semibold text-primary">Example Areas of Proven Expertise</h1>
-        <p className="mx-auto max-w-3xl text-sm text-slate-600">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Proven expertise</p>
+        <h1 className="text-4xl font-semibold text-foreground">Example Areas of Proven Expertise</h1>
+        <p className="mx-auto max-w-3xl text-sm text-muted-foreground">
           Deep experience building and deploying high-performance AI systems across demanding production environments.
         </p>
       </section>
@@ -51,10 +51,10 @@ export function CaseStudies() {
       <div className="container-balanced grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {expertiseAreas.slice(0, 3).map((area, index) => (
           <IntersectionAnimation key={area.title} animation="fade-in-up" delay={0.1 * index}>
-            <Card className="h-full border-primary/10 bg-white/95 p-6">
+            <Card className="h-full border-border p-6">
               <area.icon className="h-10 w-10 text-accent" />
-              <h2 className="mt-4 text-lg font-semibold text-primary">{area.title}</h2>
-              <p className="mt-3 text-sm text-slate-600">{area.description}</p>
+              <h2 className="mt-4 text-lg font-semibold text-card-foreground">{area.title}</h2>
+              <p className="mt-3 text-sm text-muted-foreground">{area.description}</p>
             </Card>
           </IntersectionAnimation>
         ))}
@@ -63,10 +63,10 @@ export function CaseStudies() {
       <div className="container-balanced grid gap-6 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
         {expertiseAreas.slice(3).map((area, index) => (
           <IntersectionAnimation key={area.title} animation="fade-in-up" delay={0.1 * (index + 3)}>
-            <Card className="h-full border-primary/10 bg-white/95 p-6">
+            <Card className="h-full border-border p-6">
               <area.icon className="h-10 w-10 text-accent" />
-              <h2 className="mt-4 text-lg font-semibold text-primary">{area.title}</h2>
-              <p className="mt-3 text-sm text-slate-600">{area.description}</p>
+              <h2 className="mt-4 text-lg font-semibold text-card-foreground">{area.title}</h2>
+              <p className="mt-3 text-sm text-muted-foreground">{area.description}</p>
             </Card>
           </IntersectionAnimation>
         ))}
@@ -74,11 +74,11 @@ export function CaseStudies() {
 
       <section className="container-balanced">
         <IntersectionAnimation animation="fade-in-up">
-          <div className="rounded-3xl border border-primary/10 bg-accent-soft/80 p-10 shadow-card text-center space-y-6">
-            <h2 className="text-2xl font-semibold text-primary">
+          <div className="rounded-3xl border border-border bg-accent-soft p-10 shadow-card text-center space-y-6">
+            <h2 className="text-2xl font-semibold text-foreground">
               Have a similar challenge?
             </h2>
-            <p className="text-sm text-primary/80 max-w-2xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
               If you need help with inference speed, GPU cost, or integrating AI into an existing workflow — let&apos;s talk.
             </p>
             <Link href="/contact">

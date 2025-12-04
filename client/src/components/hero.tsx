@@ -49,7 +49,7 @@ export function Hero() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
         }} />
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/95 via-primary/90 to-primary" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/95 via-primary/90 to-primary dark:from-background/95 dark:via-background/90 dark:to-background" />
 
       <div className="relative container-balanced">
         <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-4xl text-center space-y-8">
@@ -84,13 +84,13 @@ export function Hero() {
           {/* Expertise Areas */}
           <div className="glass-panel">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
                 Specialized in High-Performance AI Deployment
               </p>
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-muted-foreground">
                 Our expertise sits at the intersection of:
               </p>
-              <ul className="space-y-3 text-sm text-slate-700">
+              <ul className="space-y-3 text-sm text-card-foreground">
                 {expertiseAreas.map((area) => (
                   <li key={area} className="flex items-start gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
@@ -98,7 +98,7 @@ export function Hero() {
                   </li>
                 ))}
               </ul>
-              <p className="text-sm text-primary font-medium pt-2">
+              <p className="text-sm text-card-foreground font-medium pt-2">
                 If you need AI that works under real constraints — speed, memory, cost, reliability — that&apos;s our lane.
               </p>
             </div>
@@ -107,19 +107,19 @@ export function Hero() {
           {/* What We Deliver */}
           <div className="glass-panel">
             <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-primary/60">
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
                 What We Deliver
               </p>
               <div className="space-y-4">
                 {deliverables.map((item) => (
                   <div
                     key={item.title}
-                    className="flex items-center gap-4 rounded-xl border border-primary/10 bg-white/80 p-3"
+                    className="flex items-center gap-4 rounded-xl border border-border bg-card/80 p-3"
                   >
                     <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10">
                       <item.icon className="h-4 w-4 text-accent" />
                     </div>
-                    <p className="text-sm text-slate-700">{item.description}</p>
+                    <p className="text-sm text-card-foreground">{item.description}</p>
                   </div>
                 ))}
               </div>

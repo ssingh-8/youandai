@@ -43,9 +43,9 @@ export function ContactForm() {
   }
 
   return (
-    <div className="rounded-3xl border border-primary/10 bg-white/95 p-10 shadow-card">
-      <h2 className="text-xl font-semibold text-primary">Book a strategy call</h2>
-      <p className="mt-2 text-sm text-slate-600">
+    <div className="rounded-3xl border border-border bg-card p-10 shadow-card">
+      <h2 className="text-xl font-semibold text-card-foreground">Book a strategy call</h2>
+      <p className="mt-2 text-sm text-muted-foreground">
         Tell us about your AI deployment or performance challenge and we&apos;ll schedule a call to discuss.
       </p>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-4">
@@ -55,15 +55,15 @@ export function ContactForm() {
         </div>
         <FormField label="Company" placeholder="Company name" error={form.formState.errors.company?.message} {...form.register("company")} />
         <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">Your challenge</label>
+          <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Your challenge</label>
           <textarea
             rows={5}
             placeholder="Describe your AI deployment, performance, or integration challenge..."
-            className="w-full rounded-2xl border border-primary/10 px-4 py-3 text-sm text-primary shadow-sm focus:border-accent focus:outline-none"
+            className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
             {...form.register("challenge")}
           />
           {form.formState.errors.challenge && (
-            <p className="text-xs text-red-500">{form.formState.errors.challenge.message}</p>
+            <p className="text-xs text-destructive">{form.formState.errors.challenge.message}</p>
           )}
         </div>
         <Button type="submit" className="w-full">
@@ -82,12 +82,12 @@ type FieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
 function FormField({ label, error, ...props }: FieldProps) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">{label}</label>
+      <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">{label}</label>
       <input
         {...props}
-        className="w-full rounded-2xl border border-primary/10 px-4 py-3 text-sm text-primary shadow-sm focus:border-accent focus:outline-none"
+        className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
       />
-      {error && <p className="text-xs text-red-500">{error}</p>}
+      {error && <p className="text-xs text-destructive">{error}</p>}
     </div>
   );
 }

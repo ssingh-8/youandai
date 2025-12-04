@@ -7,7 +7,7 @@ import { LiveChatAssistant } from "@/components/live-chat";
 export const metadata = {
   title: "You & AI | Strategic AI Consultancy",
   description:
-    "You & AI delivers enterprise-grade AI strategy, implementation, and enablement to accelerate measurable business growth.",
+    "We design, build, and deploy AI systems that run fast, reliably, and at scale. Specialized in GPU-accelerated inference and production deployment.",
 };
 
 export default function RootLayout({
@@ -17,11 +17,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body className="min-h-screen bg-muted text-primary antialiased">
+      <body className="min-h-screen bg-background text-foreground antialiased">
         <Providers>
           <div className="flex min-h-screen flex-col">
             <SiteHeader />
-            <main className="flex-1 bg-gradient-subtle pb-24">{children}</main>
+            <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>
           <LiveChatAssistant />

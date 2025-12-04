@@ -35,9 +35,9 @@ export function ProcessTimeline() {
   return (
     <section className="container-balanced py-20">
       <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-2xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Our Approach</p>
-        <h2 className="mt-3 text-3xl font-semibold text-primary">From assessment to production</h2>
-        <p className="mt-4 text-sm text-slate-600">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Our Approach</p>
+        <h2 className="mt-3 text-3xl font-semibold text-foreground">From assessment to production</h2>
+        <p className="mt-4 text-sm text-muted-foreground">
           A systematic approach to building AI systems that meet strict performance requirements while integrating cleanly with your existing infrastructure.
         </p>
       </IntersectionAnimation>
@@ -50,10 +50,10 @@ export function ProcessTimeline() {
             delay={0.1 * index}
             className="relative"
           >
-            <Card className="h-full border-primary/10 bg-white/95">
+            <Card className="h-full border-border">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent">{step.phase}</p>
-              <h3 className="mt-3 text-lg font-semibold text-primary">{step.title}</h3>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
+              <h3 className="mt-3 text-lg font-semibold text-card-foreground">{step.title}</h3>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
                 {step.bullets.map((item) => (
                   <li key={item} className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-accent" />

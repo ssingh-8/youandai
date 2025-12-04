@@ -39,11 +39,11 @@ export function ValueProposition() {
   return (
     <section className="container-balanced py-20">
       <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary/70">Why You &amp; AI</p>
-        <h2 className="mt-3 text-3xl font-semibold text-primary">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Why You &amp; AI</p>
+        <h2 className="mt-3 text-3xl font-semibold text-foreground">
           AI that works under real constraints
         </h2>
-        <p className="mt-4 text-sm text-slate-600">
+        <p className="mt-4 text-sm text-muted-foreground">
           No buzzwords. No &quot;magic AI button.&quot; Just rigorous engineering focused on speed, memory, cost, and reliability.
         </p>
       </IntersectionAnimation>
@@ -56,10 +56,10 @@ export function ValueProposition() {
             delay={0.1 * index}
             className="h-full"
           >
-            <Card className="h-full border-primary/10 bg-white/95">
+            <Card className="h-full border-border">
               <item.icon className="h-10 w-10 text-accent" />
-              <h3 className="mt-4 text-lg font-semibold text-primary">{item.title}</h3>
-              <p className="mt-3 text-sm text-slate-600">{item.description}</p>
+              <h3 className="mt-4 text-lg font-semibold text-card-foreground">{item.title}</h3>
+              <p className="mt-3 text-sm text-muted-foreground">{item.description}</p>
             </Card>
           </IntersectionAnimation>
         ))}
@@ -72,10 +72,10 @@ export function ValueProposition() {
             delay={0.1 * (index + 3)}
             className="h-full"
           >
-            <Card className="h-full border-primary/10 bg-white/95">
+            <Card className="h-full border-border">
               <item.icon className="h-10 w-10 text-accent" />
-              <h3 className="mt-4 text-lg font-semibold text-primary">{item.title}</h3>
-              <p className="mt-3 text-sm text-slate-600">{item.description}</p>
+              <h3 className="mt-4 text-lg font-semibold text-card-foreground">{item.title}</h3>
+              <p className="mt-3 text-sm text-muted-foreground">{item.description}</p>
             </Card>
           </IntersectionAnimation>
         ))}

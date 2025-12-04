@@ -5,13 +5,13 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: "default" | "lg" | "sm";
 };
 
-const baseStyles = "inline-flex items-center justify-center rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-60";
+const baseStyles = "inline-flex items-center justify-center rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60";
 
 const variants: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary: "bg-primary text-white hover:bg-primary/90 shadow-accent",
-  secondary: "bg-accent text-primary hover:bg-accent/90",
-  outline: "border border-white/40 bg-white/10 text-white hover:bg-white/20",
-  ghost: "text-primary hover:text-accent",
+  primary: "bg-accent text-accent-foreground hover:bg-accent/90 shadow-accent",
+  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  outline: "border border-border bg-transparent text-foreground hover:bg-secondary",
+  ghost: "text-foreground hover:text-accent hover:bg-secondary/50",
 };
 
 const sizes: Record<NonNullable<ButtonProps["size"]>, string> = {
@@ -28,4 +28,3 @@ export function Button({ variant = "primary", size = "default", className, ...pr
     />
   );
 }
-
