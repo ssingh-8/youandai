@@ -10,7 +10,7 @@ const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
   email: z.string().email("Enter a valid email"),
   company: z.string().min(2, "Company required"),
-  challenge: z.string().min(10, "Tell us a bit more about your challenge"),
+  goals: z.string().min(10, "Tell us a bit more about your challenge"),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -44,26 +44,49 @@ export function ContactForm() {
 
   return (
     <div className="rounded-3xl border border-border bg-card p-10 shadow-card">
-      <h2 className="text-xl font-semibold text-card-foreground">Book a strategy call</h2>
+      <h2 className="text-xl font-semibold text-card-foreground">
+        Book a strategy call
+      </h2>
       <p className="mt-2 text-sm text-muted-foreground">
-        Tell us about your AI deployment or performance challenge and we&apos;ll schedule a call to discuss.
+        Tell us about your AI deployment or performance challenge and we&apos;ll
+        schedule a call to discuss.
       </p>
       <form onSubmit={form.handleSubmit(onSubmit)} className="mt-8 space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
-          <FormField label="Name" placeholder="Your name" error={form.formState.errors.name?.message} {...form.register("name")} />
-          <FormField label="Email" placeholder="you@company.com" type="email" error={form.formState.errors.email?.message} {...form.register("email")} />
+          <FormField
+            label="Name"
+            placeholder="Your name"
+            error={form.formState.errors.name?.message}
+            {...form.register("name")}
+          />
+          <FormField
+            label="Email"
+            placeholder="you@company.com"
+            type="email"
+            error={form.formState.errors.email?.message}
+            {...form.register("email")}
+          />
         </div>
-        <FormField label="Company" placeholder="Company name" error={form.formState.errors.company?.message} {...form.register("company")} />
+        <FormField
+          label="Company"
+          placeholder="Company name"
+          error={form.formState.errors.company?.message}
+          {...form.register("company")}
+        />
         <div className="space-y-2">
-          <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Your challenge</label>
+          <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+            Your Goals
+          </label>
           <textarea
             rows={5}
-            placeholder="Describe your AI deployment, performance, or integration challenge..."
+            placeholder="Describe the business problem, timeline, and systems in scope..."
             className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
-            {...form.register("challenge")}
+            {...form.register("goals")}
           />
-          {form.formState.errors.challenge && (
-            <p className="text-xs text-destructive">{form.formState.errors.challenge.message}</p>
+          {form.formState.errors.goals && (
+            <p className="text-xs text-destructive">
+              {form.formState.errors.goals.message}
+            </p>
           )}
         </div>
         <Button type="submit" className="w-full">
@@ -82,7 +105,9 @@ type FieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
 function FormField({ label, error, ...props }: FieldProps) {
   return (
     <div className="space-y-2">
-      <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">{label}</label>
+      <label className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
+        {label}
+      </label>
       <input
         {...props}
         className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-sm text-foreground shadow-sm placeholder:text-muted-foreground focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
