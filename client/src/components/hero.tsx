@@ -1,131 +1,67 @@
-import { ArrowRight, Cpu, Gauge, Server, Layers, Shield, Cloud } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { IntersectionAnimation } from "./animations";
-import { Button } from "./ui/button";
-
-const expertiseAreas = [
-  "GPU-accelerated inference",
-  "Model optimization (quantization, pruning, TensorRT-LLM–style graph simplification)",
-  "End-to-end deployment pipelines for production environments",
-  "Integrating GenAI into existing enterprise and legacy stacks",
-  "Safety-critical, latency-sensitive applications",
-  "Large-scale on-prem and multi-cloud GPU infrastructure",
-];
-
-const deliverables = [
-  {
-    icon: Gauge,
-    title: "Strict Latency",
-    description: "Systems that meet strict latency requirements",
-  },
-  {
-    icon: Cpu,
-    title: "Cost-Optimized",
-    description: "Cost-optimized GPU deployments",
-  },
-  {
-    icon: Layers,
-    title: "Accurate Models",
-    description: "Accurate, robust models tailored to your environment",
-  },
-  {
-    icon: Server,
-    title: "Clean Integration",
-    description: "Clean integration with your existing workflows",
-  },
-  {
-    icon: Shield,
-    title: "Production-Grade",
-    description: "Production-grade reliability and observability",
-  },
-];
+import { services } from "@/content/services";
+import { business } from "@/lib/business";
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-gradient-hero pb-24 pt-28 text-white">
-      {/* Geometric pattern background */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/95 via-primary/90 to-primary dark:from-background/95 dark:via-background/90 dark:to-background" />
-
-      <div className="relative container-balanced">
-        <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-4xl text-center space-y-8">
-          <div className="inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-5 py-2 text-[0.7rem] uppercase tracking-[0.2em] text-white/80">
-            <Cloud className="h-4 w-4 text-accent" />
-            High-Performance AI Deployment
+    <section className="relative overflow-hidden bg-midnight py-20 text-white sm:py-28">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-36 -top-40 h-[550px] w-[550px] rounded-full border border-white/10 shadow-[0_0_0_80px_rgba(255,255,255,0.025),0_0_0_160px_rgba(255,255,255,0.02)]"
+      />
+      <div className="container-balanced relative grid items-center gap-16 lg:grid-cols-[1.15fr_1fr]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-300">
+            One studio. Room for possibility.
+          </p>
+          <h1 className="mt-6 text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
+            Ideas into
+            <br />
+            software.
+            <br />
+            <span className="text-teal-300">Ambition into action.</span>
+          </h1>
+          <p className="mt-7 max-w-lg text-lg leading-relaxed text-slate-300">
+            {business.name} brings AI consulting, software services, and AI
+            search visibility together. A partner for your next challenge. A
+            home for what we build.
+          </p>
+          <div className="mt-9 flex flex-wrap items-center gap-5">
+            <Link href="/contact" className="action-link">
+              Start a conversation <ArrowUpRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="#services"
+              className="inline-flex items-center gap-2 text-sm text-white hover:text-teal-300"
+            >
+              Explore our services <ArrowDown className="h-4 w-4" />
+            </Link>
           </div>
-          
-          <div className="space-y-6">
-            <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-[3.5rem]">
-              AI Systems Built for
-              <span className="block text-accent">the Real World</span>
-            </h1>
-            <p className="mx-auto max-w-2xl text-lg text-white/80">
-              We design, build, and deploy AI systems that don&apos;t just demo well — they run fast, reliably, and at scale.
-            </p>
-          </div>
-
-          <Link href="/contact">
-            <Button size="lg" className="shadow-accent">
-              Book a Strategy Call
-              <ArrowRight className="ml-3 h-5 w-5" />
-            </Button>
-          </Link>
-        </IntersectionAnimation>
-
-        <IntersectionAnimation
-          animation="fade-in-up"
-          delay={0.15}
-          className="mt-16 grid gap-10 lg:grid-cols-2"
-        >
-          {/* Expertise Areas */}
-          <div className="glass-panel">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                Specialized in High-Performance AI Deployment
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Our expertise sits at the intersection of:
-              </p>
-              <ul className="space-y-3 text-sm text-card-foreground">
-                {expertiseAreas.map((area) => (
-                  <li key={area} className="flex items-start gap-3">
-                    <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
-                    <span>{area}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="text-sm text-card-foreground font-medium pt-2">
-                If you need AI that works under real constraints — speed, memory, cost, reliability — that&apos;s our lane.
-              </p>
-            </div>
-          </div>
-
-          {/* What We Deliver */}
-          <div className="glass-panel">
-            <div className="space-y-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted-foreground">
-                What We Deliver
-              </p>
-              <div className="space-y-4">
-                {deliverables.map((item) => (
-                  <div
-                    key={item.title}
-                    className="flex items-center gap-4 rounded-xl border border-border bg-card/80 p-3"
-                  >
-                    <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent/10">
-                      <item.icon className="h-4 w-4 text-accent" />
-                    </div>
-                    <p className="text-sm text-card-foreground">{item.description}</p>
-                  </div>
-                ))}
+        </div>
+        <div className="border-t border-white/20">
+          {services.map((service) => (
+            <Link
+              key={service.id}
+              href={`/services#${service.id}`}
+              className="group flex gap-5 border-b border-white/20 py-7"
+            >
+              <span className="pt-1 font-mono text-xs text-teal-300">
+                {service.number}
+              </span>
+              <div className="flex-1">
+                <p className="text-xs text-slate-400">{service.title}</p>
+                <h2 className="mt-2 text-2xl font-medium group-hover:text-teal-300">
+                  {service.promise}
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  {service.summary}
+                </p>
               </div>
-            </div>
-          </div>
-        </IntersectionAnimation>
+              <ArrowUpRight className="mt-1 h-5 w-5 text-slate-400 group-hover:text-teal-300" />
+            </Link>
+          ))}
+        </div>
       </div>
     </section>
   );

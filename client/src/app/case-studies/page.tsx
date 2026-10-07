@@ -1,6 +1,4 @@
-import { CaseStudies } from "@/components/case-studies";
-
+import { permanentRedirect } from "next/navigation";
 export default function CaseStudiesPage() {
-  return <CaseStudies />;
+  permanentRedirect("/projects");
 }
-

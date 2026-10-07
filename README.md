@@ -1,273 +1,56 @@
-# You and AI - AI Consulting Platform
+# You & AI
 
-A full-stack AI consulting platform with a Next.js frontend and Hono API backend, organized as a monorepo.
+An umbrella website for AI consulting, software services, answer engine optimization (AEO), and independent projects. Next.js provides the frontend and the same-origin contact API on Vercel. A standalone Hono server is retained for optional separate hosting.
 
-## 🏗️ Project Structure
+## Content and launch information
 
-```
-youandai/
-├── client/          # Next.js frontend application
-│   ├── src/
-│   │   ├── app/       # Next.js app router pages
-│   │   ├── components/ # React components
-│   │   ├── hooks/     # Custom React hooks
-│   │   └── lib/       # Utilities and Supabase clients
-│   ├── public/        # Static assets
-│   └── package.json
-│
-├── server/          # Hono API backend
-│   ├── src/
-│   │   ├── index.ts   # API routes and logic
-│   │   └── node.ts    # Server entry point
-│   └── package.json
-│
-├── package.json     # Root package.json for monorepo scripts
-└── README.md        # This file
-```
+- `client/src/content/business.json`: public brand, canonical domain, optional contact/booking/legal links, anonymous role titles, founder background, and projects.
+- `client/src/content/services.ts`: the three service lines.
+- `client/src/content/skills.ts`: public skill summaries.
+- `client/src/content/aeo.ts`: six practical website optimization examples.
+- [Site critique and complete placeholder inventory](docs/SITE-AUDIT.md)
+- [Owner details to fill in](docs/BUSINESS-DETAILS.md)
+- [Free email forwarding setup](docs/EMAIL-SETUP.md)
 
-## 🚀 Getting Started
+Blank optional details remain hidden. Keep secrets and personal inbox addresses out of public content. Add only approved public projects to the `projects` array using `name`, `description`, `category`, `url`, and `status` (`Live`, `In development`, or `Experiment`). DentalAI is listed as an in-house product in development, without an unconfirmed launch URL. Founder career experience is separate from company client results; the company is welcoming its first customers.
 
-### Prerequisites
+## Development
 
-- Node.js 18+
-- npm or yarn
-- Resend API key (for email notifications)
-- Supabase project (for database)
+Use Node.js 22.13+.
 
-### Installation
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/ssingh-8/youandai.git
-cd youandai
-```
-
-2. **Install all dependencies:**
 ```bash
 npm run install:all
-```
-
-Or install manually:
-```bash
-# Root dependencies
-npm install
-
-# Client dependencies
-cd client && npm install && cd ..
-
-# Server dependencies
-cd server && npm install && cd ..
-```
-
-3. **Set up environment variables:**
-
-Create `.env` file in the **client** directory:
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-NEXT_PUBLIC_API_URL=http://localhost:8787
-```
-
-Create `.env` file in the **server** directory:
-```env
-PORT=8787
-
-# Resend Configuration
-RESEND_API_KEY=your_resend_api_key
-RESEND_FROM=onboarding@resend.dev
-RESEND_TO=your_email@example.com
-
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-```
-
-## 🎯 Development
-
-### Run Both Client and Server Concurrently
-
-From the **root** directory:
-```bash
-npm run dev
-```
-
-This will start:
-- **Client**: http://localhost:3000
-- **Server**: http://localhost:8787
-
-### Run Individually
-
-**Client only:**
-```bash
 npm run dev:client
-# or
-cd client && npm run dev
 ```
 
-**Server only:**
-```bash
-npm run dev:server
-# or
-cd server && npm run dev
-```
-
-## 🏭 Production
-
-### Build
+Frontend: http://localhost:3000. The standalone server is optional; `npm run dev:server` runs it on port 8787 after creating `server/.env`.
 
 ```bash
-# Build both client and server
+npm run lint --prefix client
+npm run typecheck --prefix client
 npm run build
-
-# Or individually
-npm run build:client
-npm run build:server
+npm test
 ```
 
-### Start Production Server
+Tests exercise both contact handlers without sending real email. The two handlers live in client and server packages so each deployment can install independently; keep their behavior aligned.
 
-```bash
-npm run start
-```
+## Vercel
 
-## 📦 Tech Stack
+Use the existing project with **Root Directory: client** and the Next.js framework preset. Configure runtime variables there, not only in a local `server/.env`:
 
-### Frontend (Client)
-- **Framework**: Next.js 15+ (App Router)
-- **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
-- **State Management**: React hooks
-- **Backend Client**: Supabase
-- **TypeScript**: Full type safety
+- `RESEND_API_KEY`: server-side Resend credential.
+- `RESEND_FROM`: verified sender on your domain.
+- `RESEND_TO`: the new company email once created and tested, forwarding to the operator’s inbox.
+- Optional archival: `NEXT_PUBLIC_SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY`.
 
-### Backend (Server)
-- **Framework**: Hono (lightweight web framework)
-- **Validation**: Zod
-- **Email**: Resend API
-- **Database**: Supabase
-- **Runtime**: Node.js
-- **TypeScript**: Full type safety
+The contact form is unavailable until all three Resend variables exist. The API returns 503 when unconfigured, 400 for invalid input, 413 for oversized bodies, and 502 when the email provider rejects or fails. Success means the provider accepted the email, not guaranteed final inbox delivery. Optional Supabase archival failures are logged without including inquiry contents and do not ask the visitor to resubmit an already accepted email.
 
-## 🔌 API Endpoints
+Supabase's existing `contact_messages` columns are `name`, `email`, `company`, `goals`, and `created_at`; the selected service is included in `goals` to avoid a schema migration. No live chat or public shared broadcast channel is loaded.
 
-### Health Check
-```http
-GET http://localhost:8787/health
-```
+Confirm public email delivery, intended privacy/terms content, project details, and business naming before promoting a preview to production. The app includes body limits and a basic honeypot; production abuse controls should be configured for the actual deployment if the public form receives spam.
 
-### Contact Form Submission
-```http
-POST http://localhost:8787/contact
-Content-Type: application/json
+## Routes
 
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "company": "Acme Corp",
-  "goals": "Looking to integrate AI solutions"
-}
-```
+`/`, `/services`, `/projects`, `/about`, `/contact`, `/robots.txt`, `/sitemap.xml`. The former `/case-studies` route redirects permanently to `/projects`. Every primary page has its own metadata and canonical URL. Update `websiteUrl` if the primary hostname changes.
 
-## 📁 Detailed Structure
-
-### Client Application
-
-The frontend is a modern Next.js application with:
-- **Landing Page**: Hero, services, testimonials, CTA sections
-- **About Page**: Company information
-- **Services Page**: AI consulting services overview
-- **Contact Page**: Contact form with real-time validation
-- **Blog & Case Studies**: Content pages
-- **Live Chat**: Real-time chat functionality with Supabase
-
-### Server Application
-
-The backend is a lightweight Hono API that:
-- Validates contact form submissions
-- Sends email notifications via Resend
-- Stores contact data in Supabase
-- Provides health check endpoint
-- Configured with CORS for Next.js integration
-
-## 🔧 Configuration
-
-### CORS Setup
-
-The server is configured to accept requests from `http://localhost:3000` by default. For production, update the CORS configuration in `server/src/index.ts`:
-
-```typescript
-app.use('*', cors({ 
-  origin: ['http://localhost:3000', 'https://yourdomain.com'], 
-  allowMethods: ['POST','GET','OPTIONS'] 
-}));
-```
-
-## 📝 Available Scripts
-
-### Root Level
-- `npm run dev` - Run both client and server in development
-- `npm run build` - Build both client and server
-- `npm run start` - Start both in production mode
-- `npm run install:all` - Install all dependencies
-
-### Client Scripts
-- `npm run dev` - Start Next.js dev server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Server Scripts
-- `npm run dev` - Start server with hot reload
-- `npm run build` - Compile TypeScript
-- `npm run start` - Start production server
-
-## 🗄️ Database Schema
-
-### Supabase Tables
-
-**contact_messages**
-- `id` (uuid, primary key)
-- `name` (text)
-- `email` (text)
-- `company` (text)
-- `goals` (text)
-- `created_at` (timestamp)
-
-## 🚀 Deployment
-
-### Client Deployment (Vercel)
-
-```bash
-cd client
-vercel
-```
-
-Or connect your GitHub repository to Vercel for automatic deployments.
-
-### Server Deployment
-
-The server can be deployed to:
-- **Vercel** (as a serverless function)
-- **Railway**
-- **Render**
-- **Any Node.js hosting platform**
-
-Make sure to set all environment variables in your hosting platform.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-ISC
-
-## 🔗 Links
-
-- **Repository**: https://github.com/ssingh-8/youandai
-- **Issues**: https://github.com/ssingh-8/youandai/issues
-
----
-
-Built with ❤️ using Next.js and Hono
-
+The site does not form an LLC, create bank/accounts infrastructure, or claim legal status on the owner's behalf.
