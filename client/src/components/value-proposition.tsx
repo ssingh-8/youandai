@@ -1,84 +1,42 @@
-import { Zap, DollarSign, Target, Workflow, Activity } from "lucide-react";
-import { Card } from "./ui/card";
-import { IntersectionAnimation } from "./animations";
-
-const benefits = [
-  {
-    icon: Zap,
-    title: "Low-Latency Systems",
-    description:
-      "Sub-100ms inference goals with optimized prefill/decode separation and token throughput engineering.",
-  },
-  {
-    icon: DollarSign,
-    title: "Cost-Optimized GPU Usage",
-    description:
-      "Right-sizing GPU deployments through intelligent batching, scheduling, and resource management.",
-  },
-  {
-    icon: Target,
-    title: "Accurate & Robust Models",
-    description:
-      "Models tailored to your specific environment with comprehensive evaluation harnesses and regression testing.",
-  },
-  {
-    icon: Workflow,
-    title: "Clean Workflow Integration",
-    description:
-      "Seamless integration with existing enterprise systems, ERPs, CRMs, and internal tools.",
-  },
-  {
-    icon: Activity,
-    title: "Production Reliability",
-    description:
-      "Robust fallbacks, comprehensive monitoring, and observability for zero-downtime operations.",
-  },
-];
+import { ArrowUpRight, BrainCircuit, Code2, Search } from "lucide-react";
+import Link from "next/link";
+import { services } from "@/content/services";
+import { business } from "@/lib/business";
+const icons = [BrainCircuit, Code2, Search];
 
 export function ValueProposition() {
   return (
-    <section className="container-balanced py-20">
-      <IntersectionAnimation animation="fade-in-up" className="mx-auto max-w-3xl text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">Why You &amp; AI</p>
-        <h2 className="mt-3 text-3xl font-semibold text-foreground">
-          AI that works under real constraints
-        </h2>
-        <p className="mt-4 text-sm text-muted-foreground">
-          No buzzwords. No &quot;magic AI button.&quot; Just rigorous engineering focused on speed, memory, cost, and reliability.
+    <section id="services" className="container-balanced scroll-mt-28">
+      <div className="max-w-2xl">
+        <p className="eyebrow">How we can help</p>
+        <h2 className="section-title">Three ways to move forward.</h2>
+        <p className="mt-5 leading-relaxed text-muted-foreground">
+          Choose a focused engagement or connect strategy, development, and
+          discovery in one project. {business.audience}
         </p>
-      </IntersectionAnimation>
-
-      <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {benefits.slice(0, 3).map((item, index) => (
-          <IntersectionAnimation
-            key={item.title}
-            animation="fade-in-up"
-            delay={0.1 * index}
-            className="h-full"
-          >
-            <Card className="h-full border-border">
-              <item.icon className="h-10 w-10 text-accent" />
-              <h3 className="mt-4 text-lg font-semibold text-card-foreground">{item.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">{item.description}</p>
-            </Card>
-          </IntersectionAnimation>
-        ))}
       </div>
-      <div className="mt-6 grid gap-6 md:grid-cols-2 lg:max-w-4xl lg:mx-auto">
-        {benefits.slice(3).map((item, index) => (
-          <IntersectionAnimation
-            key={item.title}
-            animation="fade-in-up"
-            delay={0.1 * (index + 3)}
-            className="h-full"
-          >
-            <Card className="h-full border-border">
-              <item.icon className="h-10 w-10 text-accent" />
-              <h3 className="mt-4 text-lg font-semibold text-card-foreground">{item.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground">{item.description}</p>
-            </Card>
-          </IntersectionAnimation>
-        ))}
+      <div className="mt-10 grid gap-6 md:grid-cols-3">
+        {services.map((service, index) => {
+          const Icon = icons[index];
+          return (
+            <article
+              key={service.id}
+              className="flex flex-col rounded-2xl border border-border bg-card p-7"
+            >
+              <Icon className="h-7 w-7 text-foreground" />
+              <h3 className="mt-8 text-xl font-semibold">{service.title}</h3>
+              <p className="mb-8 mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                {service.summary}
+              </p>
+              <Link
+                href={`/services#${service.id}`}
+                className="inline-flex items-center gap-2 text-sm font-semibold"
+              >
+                Explore {service.title} <ArrowUpRight className="h-4 w-4" />
+              </Link>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

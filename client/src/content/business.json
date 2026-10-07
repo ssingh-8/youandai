@@ -1,0 +1,29 @@
+{
+  "name": "You & AI",
+  "tagline": "AI consulting · Software · AEO",
+  "websiteUrl": "https://www.youandai.dev",
+  "email": "",
+  "bookingUrl": "",
+  "responseTime": "",
+  "legalName": "",
+  "operator": {
+    "title": "Operations & client partnerships"
+  },
+  "technicalLead": {
+    "title": "Technical delivery"
+  },
+  "privacyUrl": "",
+  "termsUrl": "",
+  "projects": [
+    {
+      "name": "DentalAI",
+      "description": "An in-house product in development for dental practices, exploring AI-assisted documentation and day-to-day workflows, with clinical drafts reviewed by a clinician.",
+      "url": "",
+      "category": "Our own products",
+      "status": "In development"
+    }
+  ],
+  "founderBackground": "Our founders bring experience from major technology companies, including Microsoft and NVIDIA. Across their careers, they have contributed to technology serving millions of users and to large-scale model deployment.",
+  "companyStage": "You & AI is a new independent venture, now welcoming its first client engagements.",
+  "audience": "We are starting with service businesses in the US, while welcoming founders, teams, and organizations across industries and around the world."
+}

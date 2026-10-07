@@ -1,130 +1,124 @@
-import { Card } from "./ui/card";
-import { Button } from "./ui/button";
-import { IntersectionAnimation } from "./animations";
-import { Brain, Zap, Server, Sparkles } from "lucide-react";
-import Link from "next/link";
-
-const services = [
-  {
-    title: "AI Strategy & Architecture",
-    icon: Brain,
-    description:
-      "We help you decide what to build, how to build it, and how to deploy it without burning cycles on unnecessary tech.",
-    features: [
-      "Use-case evaluation and feasibility analysis",
-      "Architecture diagrams for scalable deployments",
-      "Model + GPU resource planning",
-      "Cost projections and optimization paths",
-      "Integration plan for existing systems (ERP, CRM, internal tools)",
-    ],
-    tagline: "No buzzwords. Just the shortest path to a working, measurable AI solution.",
-  },
-  {
-    title: "High-Performance Inference Optimization",
-    icon: Zap,
-    description:
-      "This is our strongest area of expertise. We design systems that run faster, cheaper, and more reliably.",
-    features: [
-      "Model quantization (INT8, FP8, FP16)",
-      "ONNX graph cleanup + operator fusion",
-      "TensorRT-style optimizations",
-      "Custom kernels and plugin-level tuning",
-      "Multi-model scheduling and memory management",
-      "Benchmarking + profiling (prefill/decode separation, token throughput)",
-      "DLA/edge compatibility planning",
-    ],
-    tagline: "If your current model is slow, expensive, or unstable — we fix that.",
-  },
-  {
-    title: "Production Deployment & MLOps",
-    icon: Server,
-    description:
-      "We build pipelines that take models from notebooks → production reliably.",
-    features: [
-      "Containerization + GPU scheduling",
-      "Multi-cloud + on-prem deployment (Kubernetes, edge devices, GPU clusters)",
-      "CI/CD pipelines for model updates",
-      "Evaluation harnesses, regression testing, automated benchmarking",
-      "Logging, metrics, and model-health monitoring",
-      "Safety-critical workflows (versioning, auditability, reproducibility)",
-    ],
-    tagline: "Especially valuable if you need repeatability, traceability, and zero-downtime deployment.",
-  },
-  {
-    title: "Custom GenAI Integrations",
-    icon: Sparkles,
-    description:
-      "We add generative AI where it actually makes sense — not as a gimmick.",
-    features: [
-      "RAG systems with hardened evaluation",
-      "Multi-modal pipelines (vision + language)",
-      "Workflow agents linked to real business tools",
-      "Fine-tuning or adapting foundation models to your domain",
-      "Fast inference endpoints with guardrails and observability",
-    ],
-    tagline: "High-performance GenAI that lives inside your existing workflows, not bolted on as a side-app.",
-  },
-];
+import { services } from "@/content/services";
+import { aeoExamples } from "@/content/aeo";
+import { business } from "@/lib/business";
+import { DualCTASection } from "./cta-section";
 
 export function ServicesOverview() {
   return (
-    <div className="space-y-16 bg-background pb-24 pt-16">
-      <section className="container-balanced space-y-4 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">What we deliver</p>
-        <h1 className="text-4xl font-semibold text-foreground">Services built for real-world AI deployment</h1>
-        <p className="mx-auto max-w-3xl text-sm text-muted-foreground">
-          From strategy to optimization to production — we help you build AI systems that meet strict latency, cost, and reliability requirements.
+    <div className="space-y-20 pb-24 pt-16">
+      <section className="container-balanced">
+        <p className="eyebrow">Our services</p>
+        <h1 className="page-title">
+          A clear plan.
+          <br />
+          Something useful at the end.
+        </h1>
+        <p className="mt-6 max-w-2xl leading-relaxed text-muted-foreground">
+          AI consulting, software development, and answer engine optimization.
+          Each engagement starts with your goals and a scope we agree together.{" "}
+          {business.audience}
         </p>
       </section>
-
       <div className="container-balanced space-y-8">
-        {services.map((service, index) => (
-          <IntersectionAnimation key={service.title} animation="fade-in-up" delay={0.1 * index}>
-            <Card className="border-border p-8">
-              <div className="flex flex-col gap-6 lg:flex-row lg:gap-10">
-                <div className="lg:w-1/3 space-y-4">
-                  <service.icon className="h-10 w-10 text-accent" />
-                  <h2 className="text-2xl font-semibold text-card-foreground">{service.title}</h2>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
-                  <p className="text-sm font-medium text-card-foreground">{service.tagline}</p>
-                </div>
-                <div className="lg:w-2/3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground mb-4">
-                    {service.title === "AI Strategy & Architecture" ? "Deliverables include:" : 
-                     service.title === "High-Performance Inference Optimization" ? "Core capabilities:" :
-                     service.title === "Production Deployment & MLOps" ? "Expertise includes:" :
-                     "Typical integrations:"}
-                  </p>
-                  <ul className="grid gap-2 sm:grid-cols-2 text-sm text-muted-foreground">
-                    {service.features.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent flex-shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+        {services.map((service) => (
+          <section
+            id={service.id}
+            key={service.id}
+            className="scroll-mt-28 rounded-2xl border border-border bg-card p-7 sm:p-10"
+          >
+            <div className="grid gap-10 lg:grid-cols-2">
+              <div>
+                <p className="eyebrow">
+                  {service.number} / {service.promise}
+                </p>
+                <h2 className="mt-4 text-3xl font-semibold">{service.title}</h2>
+                <p className="mt-5 leading-relaxed text-muted-foreground">
+                  {service.description}
+                </p>
               </div>
-            </Card>
-          </IntersectionAnimation>
+              <div>
+                <h3 className="text-sm font-semibold">What we can work on</h3>
+                <ul className="mt-5 space-y-4">
+                  {service.features.map((feature) => (
+                    <li
+                      className="flex gap-3 text-sm text-muted-foreground"
+                      key={feature}
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent"
+                      />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <p className="mt-7 border-t border-border pt-5 text-sm leading-relaxed">
+                  {service.outcome}
+                </p>
+              </div>
+            </div>
+          </section>
         ))}
       </div>
-
-      <section className="container-balanced">
-        <IntersectionAnimation animation="fade-in-up">
-          <div className="rounded-3xl border border-border bg-accent-soft p-10 shadow-card text-center space-y-6">
-            <h2 className="text-2xl font-semibold text-foreground">
-              Ready to discuss your AI deployment challenge?
-            </h2>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
-              If you need help with inference speed, GPU cost, or integrating AI into an existing workflow — that&apos;s our specialty.
+      <section className="container-balanced grid gap-8 md:grid-cols-2">
+        <div>
+          <p className="eyebrow">Understanding AEO</p>
+          <h2 className="section-title">
+            Useful answers start with useful information.
+          </h2>
+        </div>
+        <div className="space-y-6">
+          <div>
+            <h3 className="font-semibold">How does AEO relate to SEO?</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              SEO supports discovery in search. AEO also considers how clear,
+              accurate content can answer questions in AI-driven search
+              experiences. Crawlability, helpful content, and consistent
+              business information matter to both.
             </p>
-            <Link href="/contact">
-              <Button size="lg">Book a Strategy Call</Button>
-            </Link>
           </div>
-        </IntersectionAnimation>
+          <div>
+            <h3 className="font-semibold">What can we measure?</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              We agree a baseline and track relevant signals: indexed pages,
+              search traffic, qualified inquiries, and observed mentions across
+              a defined set of questions. AI answers vary, so a single
+              screenshot is not a reliable measure of success.
+            </p>
+          </div>
+        </div>
       </section>
+      <section id="aeo-examples" className="container-balanced scroll-mt-28">
+        <p className="eyebrow">AEO in practice</p>
+        <h2 className="section-title">
+          What AI search optimization looks like on a website.
+        </h2>
+        <p className="mt-5 max-w-3xl leading-relaxed text-muted-foreground">
+          These are practical ways we can improve a business website’s clarity
+          and discoverability. They build on sound SEO; no change can guarantee
+          that an AI system will cite or recommend a business.
+        </p>
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {aeoExamples.map((item, index) => (
+            <article
+              key={item.title}
+              className="rounded-2xl border border-border bg-card p-7"
+            >
+              <p className="font-mono text-xs text-muted-foreground">
+                0{index + 1}
+              </p>
+              <h3 className="mt-4 text-xl font-semibold">{item.title}</h3>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {item.description}
+              </p>
+              <p className="mt-5 border-t border-border pt-4 text-sm leading-relaxed">
+                {item.example}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <DualCTASection />
     </div>
   );
 }

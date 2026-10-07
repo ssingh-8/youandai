@@ -1,7 +1,7 @@
 {
   "name": "youandai-monorepo",
   "version": "1.0.0",
-  "description": "You and AI - AI Consulting Platform (Client + Server)",
+  "description": "You & AI — AI consulting, software services, AEO, and independent projects",
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
@@ -13,7 +13,8 @@
     "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
     "start:client": "cd client && npm start",
     "start:server": "cd server && npm start",
-    "install:all": "npm install && cd client && npm install && cd ../server && npm install"
+    "install:all": "npm install && cd client && npm install && cd ../server && npm install",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",
@@ -21,5 +22,8 @@
   },
   "dependencies": {
     "hono": "^4.10.4"
+  },
+  "engines": {
+    "node": ">=22.13.0"
   }
 }

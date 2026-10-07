@@ -25,7 +25,7 @@
     --input: 221 18% 88%;
     --ring: 174 70% 44%;
     --radius: 1rem;
-    
+
     /* Custom colors */
     --midnight: 221 62% 12%;
     --slate-600: 215 16% 47%;
@@ -53,7 +53,7 @@
     --border: 221 30% 22%;
     --input: 221 30% 22%;
     --ring: 174 85% 55%;
-    
+
     /* Custom colors */
     --midnight: 221 62% 8%;
     --slate-600: 215 16% 70%;
@@ -93,5 +93,41 @@
 
   .text-slate-muted {
     color: hsl(var(--slate-500));
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground;
+  }
+  .section-title {
+    @apply mt-4 text-3xl font-semibold tracking-tight sm:text-4xl;
+  }
+  .page-title {
+    @apply mt-5 text-4xl font-semibold leading-tight tracking-tight sm:text-5xl;
+  }
+  .action-link {
+    @apply inline-flex w-fit items-center justify-center gap-3 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent/90;
+  }
+}
+@layer base {
+  a:focus-visible,
+  button:focus-visible,
+  select:focus-visible {
+    @apply outline outline-2 outline-offset-4 outline-accent;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 }
