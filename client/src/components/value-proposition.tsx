@@ -29,7 +29,7 @@ export function ValueProposition() {
                 {service.summary}
               </p>
               <Link
-                href={`/services#${service.id}`}
+                href={service.href}
                 className="inline-flex items-center gap-2 text-sm font-semibold"
               >
                 Explore {service.title} <ArrowUpRight className="h-4 w-4" />

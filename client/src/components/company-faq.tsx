@@ -37,7 +37,7 @@ export function CompanyFAQ() {
             for questions asked in AI search experiences. It builds on clear
             content, technical search foundations, and accurate business
             information.{" "}
-            <Link href="/services#aeo-examples" className="underline">
+            <Link href="/services/aeo" className="underline">
               See practical website examples.
             </Link>
           </p>
@@ -49,7 +49,7 @@ export function CompanyFAQ() {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             Yes. DentalAI is an in-house product in development under the same
             brand, alongside our consulting and software services.{" "}
-            <Link href="/projects#dentalai" className="underline">
+            <Link href="/projects/dentalai" className="underline">
               Learn about DentalAI.
             </Link>
           </p>

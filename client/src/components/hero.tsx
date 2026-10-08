@@ -15,17 +15,19 @@ export function Hero() {
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-300">
             One studio. Room for possibility.
           </p>
-          <h1 className="mt-6 text-5xl font-semibold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-            Ideas into
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.12] tracking-tight sm:text-5xl lg:text-6xl">
+            AI consulting &amp;
             <br />
-            software.
-            <br />
-            <span className="text-teal-300">Ambition into action.</span>
+            custom software
+            <span className="mt-3 block text-teal-300">
+              for service businesses.
+            </span>
           </h1>
           <p className="mt-7 max-w-lg text-lg leading-relaxed text-slate-300">
-            {business.name} brings AI consulting, software services, and AI
-            search visibility together. A partner for your next challenge. A
-            home for what we build.
+            {business.name} helps turn manual work into useful software and
+            makes your services easier to discover through SEO and AEO. Starting
+            with service businesses, and open to founders and teams across
+            industries.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-5">
             <Link href="/contact" className="action-link">
@@ -43,7 +45,7 @@ export function Hero() {
           {services.map((service) => (
             <Link
               key={service.id}
-              href={`/services#${service.id}`}
+              href={service.href}
               className="group flex gap-5 border-b border-white/20 py-7"
             >
               <span className="pt-1 font-mono text-xs text-teal-300">

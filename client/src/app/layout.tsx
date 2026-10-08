@@ -4,6 +4,8 @@ import { Providers } from "@/components/providers";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { business, description } from "@/lib/business";
+import { StructuredData } from "@/components/structured-data";
+import searchVerification from "@/content/search-verification.json";
 export const metadata: Metadata = {
   metadataBase: business.websiteUrl ? new URL(business.websiteUrl) : undefined,
   title: {
@@ -11,6 +13,13 @@ export const metadata: Metadata = {
     template: `%s | ${business.name}`,
   },
   description,
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || searchVerification.google,
+    other: {
+      "msvalidate.01":
+        process.env.BING_SITE_VERIFICATION || searchVerification.bing,
+    },
+  },
 };
 export default function RootLayout({
   children,
@@ -20,6 +29,9 @@ export default function RootLayout({
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
+    "@id": business.websiteUrl
+      ? new URL("/#organization", business.websiteUrl).href
+      : undefined,
     name: business.name,
     url: business.websiteUrl,
     description,
@@ -44,12 +56,7 @@ export default function RootLayout({
             <SiteFooter />
           </div>
         </Providers>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organization).replace(/</g, "\\u003c"),
-          }}
-        />
+        <StructuredData data={organization} />
       </body>
     </html>
   );

@@ -19,7 +19,14 @@ export function SiteFooter() {
           <ul className="mt-5 space-y-3 text-sm text-muted-foreground">
             {[
               { href: "/services", label: "Services" },
+              { href: "/services/ai-consulting", label: "AI consulting" },
+              {
+                href: "/services/software-development",
+                label: "Software development",
+              },
+              { href: "/services/aeo", label: "AEO & SEO" },
               { href: "/projects", label: "Projects" },
+              { href: "/guides", label: "Guides" },
               { href: "/about", label: "About" },
             ].map((link) => (
               <li key={link.href}>
