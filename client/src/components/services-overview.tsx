@@ -2,6 +2,7 @@ import { services } from "@/content/services";
 import { aeoExamples } from "@/content/aeo";
 import { business } from "@/lib/business";
 import { DualCTASection } from "./cta-section";
+import Link from "next/link";
 
 export function ServicesOverview() {
   return (
@@ -9,9 +10,7 @@ export function ServicesOverview() {
       <section className="container-balanced">
         <p className="eyebrow">Our services</p>
         <h1 className="page-title">
-          A clear plan.
-          <br />
-          Something useful at the end.
+          AI consulting, software development &amp; AEO services
         </h1>
         <p className="mt-6 max-w-2xl leading-relaxed text-muted-foreground">
           AI consulting, software development, and answer engine optimization.
@@ -35,6 +34,12 @@ export function ServicesOverview() {
                 <p className="mt-5 leading-relaxed text-muted-foreground">
                   {service.description}
                 </p>
+                <Link
+                  href={service.href}
+                  className="mt-6 inline-block text-sm font-semibold underline underline-offset-4"
+                >
+                  Explore {service.title} →
+                </Link>
               </div>
               <div>
                 <h3 className="text-sm font-semibold">What we can work on</h3>

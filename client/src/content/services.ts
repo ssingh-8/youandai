@@ -1,6 +1,7 @@
 export const services = [
   {
     id: "ai-consulting",
+    href: "/services/ai-consulting",
     number: "01",
     title: "AI consulting",
     promise: "Put AI to work.",
@@ -19,6 +20,7 @@ export const services = [
   },
   {
     id: "software-services",
+    href: "/services/software-development",
     number: "02",
     title: "Software services",
     promise: "Build what’s next.",
@@ -37,6 +39,7 @@ export const services = [
   },
   {
     id: "aeo",
+    href: "/services/aeo",
     number: "03",
     title: "AI search & AEO",
     promise: "Help people find you.",

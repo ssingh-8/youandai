@@ -11,6 +11,7 @@ An umbrella website for AI consulting, software services, answer engine optimiza
 - [Site critique and complete placeholder inventory](docs/SITE-AUDIT.md)
 - [Owner details to fill in](docs/BUSINESS-DETAILS.md)
 - [Free email forwarding setup](docs/EMAIL-SETUP.md)
+- [SEO/AEO setup and measurement](docs/SEARCH-SETUP.md)
 
 Blank optional details remain hidden. Keep secrets and personal inbox addresses out of public content. Add only approved public projects to the `projects` array using `name`, `description`, `category`, `url`, and `status` (`Live`, `In development`, or `Experiment`). DentalAI is listed as an in-house product in development, without an unconfirmed launch URL. Founder career experience is separate from company client results; the company is welcoming its first customers.
 
@@ -51,6 +52,10 @@ Confirm public email delivery, intended privacy/terms content, project details, 
 
 ## Routes
 
-`/`, `/services`, `/projects`, `/about`, `/contact`, `/robots.txt`, `/sitemap.xml`. The former `/case-studies` route redirects permanently to `/projects`. Every primary page has its own metadata and canonical URL. Update `websiteUrl` if the primary hostname changes.
+`/`, `/services`, `/services/ai-consulting`, `/services/software-development`, `/services/aeo`, `/projects`, `/projects/dentalai`, `/guides`, three `/guides/[slug]` articles, `/about`, `/contact`, `/robots.txt`, `/sitemap.xml`, and `/opengraph-image`. The former `/case-studies` route redirects permanently to `/projects`. Every primary page has its own metadata and canonical URL. The convenience hosts `youandi.dev` and `www.youandi.dev` redirect permanently to the same path on `www.youandai.dev`. Update `websiteUrl` and the redirect destination together if the primary hostname changes.
+
+Service detail pages are defined in `client/src/content/service-details.ts`; guides are defined in `client/src/content/guides.ts`. Both generate static routes, metadata, and sitemap entries. Keep the links in `services.ts` aligned when changing a service slug. The original `/services#...` section links still work.
+
+`client/src/content/search-verification.json` contains public Google and Bing proof-of-ownership tags obtained from the owner's signed-in webmaster tools. These are not API credentials. Optional `GOOGLE_SITE_VERIFICATION` and `BING_SITE_VERIFICATION` build-time variables override them. Verification must still be completed in the corresponding account after deployment; do not remove the tags afterward.
 
 The site does not form an LLC, create bank/accounts infrastructure, or claim legal status on the owner's behalf.

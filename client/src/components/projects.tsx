@@ -35,7 +35,14 @@ export function ProjectList() {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             {project.description}
           </p>
-          {webUrl(project.url) ? (
+          {project.name === "DentalAI" ? (
+            <Link
+              href="/projects/dentalai"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
+            >
+              Explore DentalAI <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          ) : webUrl(project.url) ? (
             <a
               href={webUrl(project.url)}
               className="mt-6 inline-flex items-center gap-2 text-sm font-semibold"
